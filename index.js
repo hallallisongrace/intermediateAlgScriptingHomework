@@ -440,11 +440,32 @@ function binaryAgent(str) {
 // Remember, you can access object properties through either dot notation or [] notation.
 
 function truthCheck(collection, pre) {
+return collection.every(function(dataPoint){
+  console.log(dataPoint[pre]);
+  return dataPoint[pre];
+});
+
+//or
+
+
+  let result = true;
+  for (let i = 0; i < collection.length; i += 1){
+    console.log(collection[i][pre]);
+    if (
+    collection[i][pre] === undefined ||
+     collection [i][pre] === 0 ||
+     collection[i][pre] === "" ||
+     Number.isNaN(collection[i][pre]) === ""
+      )  {
+      result = false;
+    }
+  }
     return pre;
   }
   
   truthCheck([{"user": "Tinky-Winky", "sex": "male"}, {"user": "Dipsy", "sex": "male"}, {"user": "Laa-Laa", "sex": "female"}, {"user": "Po", "sex": "female"}], "sex");
 
+  console.log(finalAnswer);
   
 
 //   19.Intermediate Algorithm Scripting: Arguments Optional
@@ -461,10 +482,25 @@ function truthCheck(collection, pre) {
 // If either argument isn't a valid number, return undefined.
 
 function addTogether() {
-    return false;
+    var params = [].slice.call(arguments);
+    if (!params.every(function(param){
+      return typeOf param ==='number';
+    })){
+      return undefined;
+    }
+  if (params.length===2){
+    return params[0] + params[1];
   }
-  
-  addTogether(2,3);
+  else{
+    var firstParam = param[0];
+    var addOneMore=function(secondParam){
+return addTogether(firstParam,secondParam);
+    };
+    return addOneMore;
+  }
+  return params;
+}
+  addTogether("http://bit.ly/IqT6zt");
 
 
 
@@ -483,14 +519,32 @@ function addTogether() {
 var Person = function(firstAndLast) {
     // Only change code below this line
     // Complete the method below and implement the others similarly
+    this.firstName = firstAndLast.split('')[0];
     this.getFullName = function() {
-      return "";
+      return firstAndLast;
     };
-    return firstAndLast;
+
+    this.getFirstName = function() {
+return firstAndLast.split(" ")[0];
+    };
+    this.getLastName = function() {
+      return firstAndLast.split(" ")[1];
+    };
+    this.setFullName = function() {
+      return firstAndLast = newFullName;
+    }
+
+    this.setFirstName = function(newFirstName) {
+      return firstAndLast = newFirstName + " " + this.getLastName();
+    }
+    this.setLastName = function(newLastName) {
+      return firstAndLast = this.getFirstName() + " " + newLastName;
+    }
   };
   
   var bob = new Person('Bob Ross');
-  bob.getFullName();
+  bob.setFullName("Haskell");
+  console.log(Object.keys(bob.getFullName());
 
 
 //   21 Intermediate Algorithm Scripting: Map the Debris
@@ -507,7 +561,12 @@ var Person = function(firstAndLast) {
 function orbitalPeriod(arr) {
     var GM = 398600.4418;
     var earthRadius = 6367.4447;
-    return arr;
+
+    return arr.reduce(function(acc, obj) {
+      var orbPeriod =Math.round(2*Math.PI*Math.sqrt(Math.pow(earthRadius +obj.avgAlt,3)/GM));
+      acc.push({name: obj.name, orbitalPeriod: orbPeriod});
+      return acc; 
+    }, []);
   }
   
   orbitalPeriod([{name : "sputnik", avgAlt : 35873.5553}]);
@@ -524,9 +583,28 @@ function orbitalPeriod(arr) {
 // We'll also pass strings with special symbols, such as "2A3*3a2", "2A3 3a2", and "2_A3*3#A2".
 
 function palindrome(str) {
+  str=str.toLowerCase();
+
+for(var i=0; <str.length; i++){
+  str=str.replace(''.'');
+  str=str.replace(''.'');
+  st=str.replace(''.'');
+  str=str.replace('/'.'');
+  str=str.replace('_','');
+  str=str.replace('.', '');
+  str=str.replace('('.'');
+  str=str.replace('('.'');
+}
+
+  var copy = str.split('').reverse().join(''); 
+
+  if(copy=str){
     return true;
+  }
+  else{
+    return false;
+  }
   }
   
   
-  
-  palindrome("eye");
+  palindrome("0_0 (: /.\ :) 0.0");
